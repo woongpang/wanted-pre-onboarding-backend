@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "wanted-pre-onboardung-backend-selection-assignment"
+version = "0.1.0"
+description = ""
+authors = ["woongpang <jr.woong@gmail.com>"]
+readme = "README.md"
+packages = [{include = "wanted_pre_onboardung_backend_selection_assignment"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.4"
+djangorestframework = "^3.14.0"
+djangorestframework-simplejwt = "^5.2.2"
+black = "^23.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
