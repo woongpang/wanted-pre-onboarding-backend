@@ -22,7 +22,7 @@
 
 ```bash
 $ git init
-$ git clone https://github.com/2017250297-choi/cookai.git
+$ git clone https://github.com/woongpang/wanted-pre-onboarding-backend
 ```
 
 #### 패키지 밎 라이브러리 설치 | https://python-poetry.org/docs/
@@ -32,7 +32,7 @@ $ poetry shell
 $ poetry install
 ```
 
-#### DB 연동 | MYSQL
+#### DB 연동 | MYSQL | https://dev.mysql.com/doc/
 
 ```bash
 $ python manage.py makemigrations
