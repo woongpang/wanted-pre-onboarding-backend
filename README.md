@@ -4,6 +4,16 @@
 ## 지원자의 성명 : 이기웅
 <br>
 
+## ⚙️ 개발 환경 (Tech Stack)
+
+- **Language** : `Python 3.11`
+- **IDE** : `Visual Studio Code`
+- **Framework** : `Django-Rest-Framework 3.14.0`
+- **Database** : `mysql  Ver 8.0.33`
+- **Packaging-tool** : `Poetry 1.5.0`
+
+<br>
+
 ## 애플리케이션의 실행 방법 (엔드포인트 호출 방법 포함)
 
 ###  프로젝트 설치 및 실행 방법
@@ -28,6 +38,7 @@ $ poetry install
 $ python manage.py makemigrations
 $ python manage.py migrate
 ```
+##### 참고: 위의 명령어를 실행하기 전에, 로컬 머신에 MySQL이 설치되어 있어야 하고 사용자 본인이 데이터베이스 이름, 사용자 이름, 비밀번호, 그리고 기타 관련 설정을 직접 설정하셔야 합니다. 
 
 #### 백엔드 서버 실행
 
