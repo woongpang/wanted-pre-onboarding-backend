@@ -59,3 +59,10 @@ class ArticleDeleteView(generics.DestroyAPIView):
         super().check_object_permissions(request, obj)
         if obj.author != request.user:
             raise PermissionDenied("게시글 작성자만 삭제할 수 있습니다.")
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(
+            {"message": "게시글이 성공적으로 삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT
+        )
