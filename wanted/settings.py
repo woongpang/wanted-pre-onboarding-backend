@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "articles",
     "users",
+    "drf_yasg",
 ]
 
 REST_FRAMEWORK = {
