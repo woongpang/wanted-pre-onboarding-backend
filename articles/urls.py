@@ -1,22 +1,18 @@
 from django.urls import path
-from . import views
+from articles.views import (
+    ArticleCreateView,
+    ArticleListView,
+    ArticleDetailView,
+    ArticleUpdateView,
+    ArticleDeleteView,
+)
 
 urlpatterns = [
-    path("", views.Articles.as_view()),
-    path("<int:article_id>/", views.ArticleDetail.as_view()),
-    path("<int:article_id>/photos/", views.ArticlePhotos.as_view()),
-    path("comments/", views.CommentsView.as_view(), name="main_comment_view"),
+    path("create/", ArticleCreateView.as_view(), name="article_create"),
+    path("articles/", ArticleListView.as_view(), name="article_list"),
+    path("articles/<int:pk>/", ArticleDetailView.as_view(), name="article_detail"),
+    path("articles/<int:pk>/edit/", ArticleUpdateView.as_view(), name="article_edit"),
     path(
-        "<int:article_id>/comments/", views.CommentsView.as_view(), name="comment_view"
+        "articles/<int:pk>/delete/", ArticleDeleteView.as_view(), name="article_delete"
     ),
-    path(
-        "comments/<int:comment_id>/",
-        views.CommentsDetailView.as_view(),
-        name="comments_detail_view",
-    ),
-    path("like/<int:comment_id>/", views.LikeView.as_view(), name="like_view"),
-    path(
-        "bookmark/<int:article_id>/", views.BookmarkView.as_view(), name="bookmark_view"
-    ),
-    path("search/<str:query>/", views.SearchView.as_view(), name="search_view"),
 ]
