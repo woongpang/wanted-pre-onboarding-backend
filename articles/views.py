@@ -30,7 +30,7 @@ class ArticlePagination(PageNumberPagination):
 
 
 class ArticleListView(generics.ListAPIView):
-    queryset = Article.objects.all()
+    queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
     pagination_class = ArticlePagination
 
