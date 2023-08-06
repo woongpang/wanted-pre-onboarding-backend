@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from users.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,15 +11,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ("email", "password")
 
-    def validate_email(self, value):
-        if "@" not in value:
-            raise serializers.ValidationError('Email must contain "@" symbol.')
-        return value
-
     def create(self, validated_data):
         user = User(
             email=validated_data["email"],
-            password=make_password(validated_data["password"]),  # 비밀번호 암호화
+            password=make_password(validated_data["password"]),
         )
         user.save()
         return user
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["email"] = user.email
+        return token

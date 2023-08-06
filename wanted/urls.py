@@ -8,12 +8,11 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="OPEN API",
+        title="WANTED API",
         default_version="v1",
-        description="Test description",
+        description="wanted-pre-onboarding-backend API 명세서",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
-        license=openapi.License(name="BSD License"),
+        contact=openapi.Contact(email="matiz1542@naver.com"),
     ),
     public=True,
     permission_classes=[permissions.AllowAny],
@@ -25,7 +24,7 @@ urlpatterns = [
     path("articles/", include("articles.urls")),
 ]
 if settings.DEBUG:
-    urlpatterns += [
+    urlpatterns = [
         re_path(
             r"^swagger(?P<format>\.json|\.yaml)$",
             schema_view.without_ui(cache_timeout=0),
@@ -41,4 +40,4 @@ if settings.DEBUG:
             schema_view.with_ui("redoc", cache_timeout=0),
             name="schema-redoc",
         ),
-    ]
+    ] + urlpatterns
