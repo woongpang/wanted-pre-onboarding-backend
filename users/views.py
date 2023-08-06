@@ -17,12 +17,17 @@ class SignUpView(APIView):
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
+        password2 = request.data.get("password2")  # 2차 비밀번호 입력
 
         if email is None or "@" not in email or password is None or len(password) < 8:
             return Response(
-                {
-                    "error": "이메일과 비밀번호는 비워둘 수 없으며, 이메일에는 '@'가 포함되어야 하고, 비밀번호는 8자 이상이어야 합니다."
-                },
+                {"error": "이메일과 비밀번호는 필수이며, 이메일에는 '@'가 포함되어야 하고, 비밀번호는 8자 이상이어야 합니다."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        if password != password2:
+            return Response(
+                {"error": "비밀번호가 일치하지 않습니다."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
