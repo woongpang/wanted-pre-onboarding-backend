@@ -6,13 +6,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from articles.serializers import ArticleSerializer
 from articles.models import Article
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.parsers import JSONParser
 
 
 class ArticleCreateView(APIView):
     permission_classes = (IsAuthenticated,)
+    parser_classes = (JSONParser,)
 
+    @swagger_auto_schema(request_body=ArticleSerializer)
     def post(self, request):
-        serializer = ArticleSerializer(data=request.data)
+        serializer = ArticleSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             serializer.save(author=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -39,7 +43,9 @@ class ArticleDetailView(generics.RetrieveAPIView):
 class ArticleUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    parser_classes = (JSONParser,)
 
+    @swagger_auto_schema(request_body=ArticleSerializer)
     def check_object_permissions(self, request, obj):
         super().check_object_permissions(request, obj)
         if obj.author != request.user:
